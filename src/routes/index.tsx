@@ -198,11 +198,6 @@ function Index() {
 }
 
 function Landing() {
-  const [revealed, setRevealed] = useState(false);
-  useEffect(() => {
-    const id = setTimeout(() => setRevealed(true), 5000);
-    return () => clearTimeout(id);
-  }, []);
 
   const faqs = [
     {
