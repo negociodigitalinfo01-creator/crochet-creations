@@ -423,6 +423,7 @@ function Landing() {
                 oldPrice: "$29.90",
                 price: "$9.90",
                 cta: "Empezar con Básico",
+                link: "https://pay.hotmart.com/M105490506A?off=j2dytgil&checkoutMode=10",
                 features: [
                   { text: "Curso Completo de Crochet", on: true },
                   { text: "Acceso Vitalicio", on: true },
@@ -516,15 +517,18 @@ function Landing() {
                     </li>
                   ))}
                 </ul>
-                <button
-                  className={`w-full font-bold py-4 rounded-2xl transition-all ${
+                <a
+                  href={p.link ?? "#"}
+                  target={p.link ? "_blank" : undefined}
+                  rel={p.link ? "noopener noreferrer" : undefined}
+                  className={`w-full text-center font-bold py-4 rounded-2xl transition-all ${
                     p.highlight
                       ? "bg-rose-500 text-white hover:bg-rose-600 shadow-lg"
                       : "bg-rose-200 text-rose-700 hover:bg-rose-300"
                   }`}
                 >
                   {p.cta}
-                </button>
+                </a>
               </div>
             ))}
           </div>
