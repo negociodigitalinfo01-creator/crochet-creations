@@ -440,6 +440,7 @@ function Landing() {
                 oldPrice: "$59.90",
                 price: "$19.90",
                 cta: "Quiero el Popular",
+                link: "https://pay.hotmart.com/M105490506A?off=nirptini&checkoutMode=10",
                 features: [
                   { text: "Curso Completo de Crochet", on: true },
                   { text: "Acceso Vitalicio", on: true },
@@ -456,6 +457,7 @@ function Landing() {
                 oldPrice: "$99.90",
                 price: "$39.90",
                 cta: "Quiero el Premium",
+                link: "https://pay.hotmart.com/M105490506A?off=miq9ejq9&checkoutMode=10",
                 features: [
                   { text: "Curso Completo de Crochet", on: true },
                   { text: "Acceso Vitalicio", on: true },
