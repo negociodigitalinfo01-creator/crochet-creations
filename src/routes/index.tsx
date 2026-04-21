@@ -53,7 +53,148 @@ function CountdownBar() {
   );
 }
 
+type QuizStep = {
+  question: string;
+  options: { icon: string; label: string }[];
+  cta: string;
+};
+
+const QUIZ_STEPS: QuizStep[] = [
+  {
+    question: "¿Cuál es tu nivel de experiencia?",
+    cta: "Siguiente →",
+    options: [
+      { icon: "🌱", label: "Cero — nunca he tejido" },
+      { icon: "🧶", label: "Básico — conozco algunos puntos" },
+      { icon: "🏅", label: "Experta — ya tejo con frecuencia" },
+    ],
+  },
+  {
+    question: "¿Cuál es tu objetivo principal?",
+    cta: "Siguiente →",
+    options: [
+      { icon: "💰", label: "Generar ingresos vendiendo mis piezas" },
+      { icon: "💖", label: "Tenerlo como hobby creativo" },
+      { icon: "🎁", label: "Hacer regalos para mi familia" },
+    ],
+  },
+  {
+    question: "¿Cuánto tiempo tienes disponible?",
+    cta: "Ver mi resultado →",
+    options: [
+      { icon: "⏰", label: "1 a 2 horas por día" },
+      { icon: "⏱️", label: "3 a 5 horas por día" },
+      { icon: "⏲️", label: "Más de 5 horas por día" },
+    ],
+  },
+];
+
+function Quiz({ onFinish }: { onFinish: () => void }) {
+  const [step, setStep] = useState(0);
+  const [selected, setSelected] = useState<number | null>(null);
+  const current = QUIZ_STEPS[step];
+  const progress = ((step + 1) / QUIZ_STEPS.length) * 100;
+
+  const handleNext = () => {
+    if (selected === null) return;
+    if (step < QUIZ_STEPS.length - 1) {
+      setStep(step + 1);
+      setSelected(null);
+    } else {
+      onFinish();
+    }
+  };
+
+  return (
+    <section className="min-h-screen bg-rose-50 flex flex-col items-center justify-center px-4 py-10">
+      <div className="w-full max-w-xl">
+        {/* Logo */}
+        <div className="flex flex-col items-center mb-6">
+          <div className="h-14 w-14 rounded-full bg-rose-500 flex items-center justify-center text-white font-black text-xl mb-3">
+            C
+          </div>
+          <p className="text-rose-500 text-xs font-bold tracking-widest uppercase">
+            Paso {step + 1} de {QUIZ_STEPS.length}
+          </p>
+        </div>
+
+        {/* Progress */}
+        <div className="w-full h-1.5 bg-rose-100 rounded-full overflow-hidden mb-8">
+          <div
+            className="h-full bg-rose-500 transition-all duration-500"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+
+        {/* Card */}
+        <div className="bg-white rounded-3xl p-8 shadow-lg">
+          <h2
+            className="text-2xl md:text-3xl font-black text-center text-gray-900 mb-8"
+            style={{ fontFamily: '"Playfair Display", serif' }}
+          >
+            {current.question}
+          </h2>
+
+          <div className="space-y-3 mb-6">
+            {current.options.map((opt, i) => {
+              const active = selected === i;
+              return (
+                <button
+                  key={opt.label}
+                  onClick={() => setSelected(i)}
+                  className={`w-full flex items-center gap-3 p-4 rounded-2xl border-2 transition-all text-left ${
+                    active
+                      ? "bg-rose-100 border-rose-500"
+                      : "bg-rose-50/50 border-transparent hover:border-rose-200"
+                  }`}
+                >
+                  <span className="h-9 w-9 rounded-full bg-white flex items-center justify-center text-lg shadow-sm">
+                    {opt.icon}
+                  </span>
+                  <span className="font-semibold text-gray-800 text-sm md:text-base">
+                    {opt.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            onClick={handleNext}
+            disabled={selected === null}
+            className={`w-full py-4 rounded-2xl font-bold transition-all ${
+              selected !== null
+                ? "bg-rose-500 text-white hover:bg-rose-600 shadow-md"
+                : "bg-gray-100 text-gray-400 cursor-not-allowed"
+            }`}
+          >
+            {current.cta}
+          </button>
+        </div>
+
+        {/* Dots */}
+        <div className="flex justify-center gap-2 mt-6">
+          {QUIZ_STEPS.map((_, i) => (
+            <div
+              key={i}
+              className={`h-1.5 rounded-full transition-all ${
+                i === step ? "w-8 bg-rose-500" : "w-2 bg-rose-200"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Index() {
+  const [quizDone, setQuizDone] = useState(false);
+
+  if (!quizDone) {
+    return <Quiz onFinish={() => setQuizDone(true)} />;
+  }
+
   const faqs = [
     {
       q: "¿Necesito saber crochet para empezar?",
@@ -93,21 +234,7 @@ function Index() {
     <div className="min-h-screen bg-gradient-to-b from-rose-50 via-white to-white">
       <CountdownBar />
 
-      {/* NAV */}
-      <nav className="w-full px-6 md:px-16 py-5 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="h-10 w-10 rounded-full bg-rose-500 flex items-center justify-center text-white font-black">
-            C
-          </div>
-          <span className="font-black text-gray-900 text-lg">CrochetMaster</span>
-        </div>
-        <a
-          href="#precios"
-          className="bg-rose-500 hover:bg-rose-600 text-white font-bold px-5 py-2 rounded-full text-sm transition-all whitespace-nowrap"
-        >
-          Quiero empezar
-        </a>
-      </nav>
+
 
       {/* HERO + VIDEO */}
       <section className="px-6 md:px-16 pt-6 pb-12 max-w-5xl mx-auto text-center">
