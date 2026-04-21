@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import IntroLanding from "@/components/IntroLanding";
+import instructoraImg from "@/assets/instructora.webp";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -243,7 +244,7 @@ function Index() {
       {/* HERO + VIDEO */}
       <section className="px-6 md:px-16 pt-6 pb-12 max-w-5xl mx-auto text-center">
         <span className="inline-block bg-rose-100 text-rose-600 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6">
-          Curso Online de Crochet
+          ENTRENAMIENTO VESTIDOS QUE SE VENDEN
         </span>
         <h1
           className="text-3xl md:text-5xl font-black leading-tight text-gray-900 mb-5"
@@ -349,7 +350,7 @@ function Index() {
               <img
                 alt="Instructora"
                 className="relative rounded-3xl w-64 h-80 object-cover shadow-xl"
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop"
+                src={instructoraImg}
               />
             </div>
           </div>
@@ -519,7 +520,7 @@ function Index() {
                   className={`w-full font-bold py-4 rounded-2xl transition-all ${
                     p.highlight
                       ? "bg-rose-500 text-white hover:bg-rose-600 shadow-lg"
-                      : "bg-gray-900 text-white hover:bg-gray-800"
+                      : "bg-rose-200 text-rose-700 hover:bg-rose-300"
                   }`}
                 >
                   {p.cta}
