@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import IntroLanding from "@/components/IntroLanding";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -189,10 +190,13 @@ function Quiz({ onFinish }: { onFinish: () => void }) {
 }
 
 function Index() {
-  const [quizDone, setQuizDone] = useState(false);
+  const [stage, setStage] = useState<"intro" | "quiz" | "landing">("intro");
 
-  if (!quizDone) {
-    return <Quiz onFinish={() => setQuizDone(true)} />;
+  if (stage === "intro") {
+    return <IntroLanding onStart={() => setStage("quiz")} />;
+  }
+  if (stage === "quiz") {
+    return <Quiz onFinish={() => setStage("landing")} />;
   }
 
   const faqs = [
@@ -411,61 +415,114 @@ function Index() {
           </h2>
           <p className="text-center text-gray-500 mb-12">Pago único · Acceso de por vida · Sin mensualidades</p>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-6 items-stretch">
             {[
               {
-                name: "Básico",
-                price: "$27",
-                features: ["Curso de puntos básicos", "3 modelos de vestidos", "2 modelos de bolsas", "Acceso de por vida"],
+                name: "PLAN BÁSICO",
+                oldPrice: "$29.90",
+                price: "$9.90",
+                cta: "Empezar con Básico",
+                features: [
+                  { text: "Curso Completo de Crochet", on: true },
+                  { text: "Acceso Vitalicio", on: true },
+                  { text: "Material PDF descargable", on: true },
+                  { text: "Soporte por email", on: true },
+                  { text: "Comunidad privada", on: false },
+                  { text: "Clases en vivo", on: false },
+                  { text: "Certificado digital", on: false },
+                ],
                 highlight: false,
               },
               {
-                name: "Premium",
-                price: "$47",
-                features: ["Todo lo del Básico", "Modelos nuevos CADA SEMANA", "Módulo: Cómo vender tu trabajo", "Comunidad privada de alumnas", "Soporte directo con la instructora"],
+                name: "PLAN POPULAR",
+                oldPrice: "$59.90",
+                price: "$19.90",
+                cta: "Quiero el Popular",
+                features: [
+                  { text: "Curso Completo de Crochet", on: true },
+                  { text: "Acceso Vitalicio", on: true },
+                  { text: "Material PDF descargable", on: true },
+                  { text: "Soporte prioritario", on: true },
+                  { text: "Comunidad privada de alumnas", on: true },
+                  { text: "Clases en vivo mensuales", on: true },
+                  { text: "Certificado digital", on: false },
+                ],
                 highlight: true,
               },
               {
-                name: "Master",
-                price: "$97",
-                features: ["Todo lo del Premium", "Mentoría grupal mensual", "Plantillas de fotos para vender", "Guía de precios profesional", "Certificado de finalización"],
+                name: "PLAN PREMIUM",
+                oldPrice: "$99.90",
+                price: "$39.90",
+                cta: "Quiero el Premium",
+                features: [
+                  { text: "Curso Completo de Crochet", on: true },
+                  { text: "Acceso Vitalicio", on: true },
+                  { text: "Material PDF descargable", on: true },
+                  { text: "Soporte VIP 1 a 1", on: true },
+                  { text: "Comunidad privada de alumnas", on: true },
+                  { text: "Clases en vivo mensuales", on: true },
+                  { text: "Certificado digital oficial", on: true },
+                ],
                 highlight: false,
               },
             ].map((p) => (
               <div
                 key={p.name}
-                className={`relative rounded-3xl p-8 ${
+                className={`relative rounded-3xl p-8 bg-white flex flex-col ${
                   p.highlight
-                    ? "bg-rose-500 text-white shadow-2xl scale-105"
-                    : "bg-white border border-rose-100 shadow-sm"
+                    ? "border-2 border-rose-400 shadow-2xl bg-rose-50/40"
+                    : "border border-rose-100 shadow-sm"
                 }`}
               >
                 {p.highlight && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 text-rose-900 text-xs font-black uppercase tracking-wider px-4 py-1 rounded-full">
-                    Más elegido
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-rose-500 text-white text-xs font-black uppercase tracking-wider px-4 py-1 rounded-full whitespace-nowrap">
+                    ⭐ MÁS ELEGIDO
                   </span>
                 )}
-                <h3 className="font-black text-2xl mb-2">{p.name}</h3>
-                <div className="mb-6">
-                  <span className="text-5xl font-black">{p.price}</span>
-                  <span className={`ml-1 text-sm ${p.highlight ? "text-rose-100" : "text-gray-400"}`}>USD único</span>
+                <p className="text-xs font-bold tracking-widest text-gray-500 uppercase mb-3">
+                  {p.name}
+                </p>
+                <p className="text-sm text-gray-400 line-through mb-1">
+                  {p.oldPrice} USD
+                </p>
+                <div className="mb-1">
+                  <span className="text-5xl font-black text-gray-900">
+                    {p.price}
+                  </span>
+                  <span className="ml-1 text-sm text-gray-400 font-semibold">
+                    USD
+                  </span>
                 </div>
-                <ul className="space-y-3 mb-8">
+                <p className="text-rose-500 text-sm font-semibold mb-6">
+                  Pago único · Acceso vitalicio
+                </p>
+                <ul className="space-y-3 mb-8 flex-1">
                   {p.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm">
-                      <span className={p.highlight ? "text-yellow-300" : "text-rose-500"}>✓</span>
-                      <span className={p.highlight ? "text-rose-50" : "text-gray-600"}>{f}</span>
+                    <li
+                      key={f.text}
+                      className={`flex items-start gap-2 text-sm ${
+                        f.on ? "text-gray-700" : "text-gray-300"
+                      }`}
+                    >
+                      <span
+                        className={
+                          f.on ? "text-rose-500 font-bold" : "text-gray-300"
+                        }
+                      >
+                        {f.on ? "✓" : "✕"}
+                      </span>
+                      <span>{f.text}</span>
                     </li>
                   ))}
                 </ul>
                 <button
-                  className={`w-full font-bold py-3 rounded-full transition-all ${
+                  className={`w-full font-bold py-4 rounded-2xl transition-all ${
                     p.highlight
-                      ? "bg-white text-rose-500 hover:bg-rose-50"
-                      : "bg-rose-500 text-white hover:bg-rose-600"
+                      ? "bg-rose-500 text-white hover:bg-rose-600 shadow-lg"
+                      : "bg-gray-900 text-white hover:bg-gray-800"
                   }`}
                 >
-                  Quiero este plan
+                  {p.cta}
                 </button>
               </div>
             ))}
