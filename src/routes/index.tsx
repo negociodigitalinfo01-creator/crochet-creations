@@ -1,157 +1,130 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Curso Crochet - Crea Vestidos Desde Casa" },
+      { title: "CrochetMaster - Vestidos y Bolsas Tejidos a Mano" },
       {
         name: "description",
         content:
-          "Aprende a crear vestidos a crochet desde casa y conviértelo en una fuente de ingresos, incluso si empiezas desde cero.",
+          "Aprende a tejer vestidos y bolsas a crochet desde cero. Curso online con +12.000 alumnas y 50 años de experiencia.",
       },
     ],
   }),
 });
 
-function Countdown() {
-  const [seconds, setSeconds] = useState(11 * 60 + 48);
-  useEffect(() => {
-    const id = setInterval(() => setSeconds((s) => (s > 0 ? s - 1 : 0)), 1000);
-    return () => clearInterval(id);
-  }, []);
-  const m = String(Math.floor(seconds / 60)).padStart(2, "0");
-  const s = String(seconds % 60).padStart(2, "0");
-  return (
-    <span>
-      {m}:{s}
-    </span>
-  );
-}
-
 function Index() {
   return (
-    <div className="bg-white text-gray-900 min-h-screen">
-      {/* TOPO URGÊNCIA */}
-      <section className="bg-rose-500 text-white text-center py-3 font-bold">
-        ⏰ DESCUENTO DISPONIBLE POR: <Countdown />
-      </section>
-
-      {/* HEADLINE */}
-      <section className="text-center py-10 px-4">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">
-          CREA VESTIDOS A CROCHET DESDE CASA
-        </h1>
-        <p className="text-lg text-gray-600">
-          Y conviértelo en una fuente de ingresos incluso si empiezas desde cero
-        </p>
-      </section>
-
-      {/* VÍDEO */}
-      <section className="max-w-3xl mx-auto px-4">
-        <div className="aspect-video bg-black rounded-2xl" />
-      </section>
-
-      {/* AUTORIDADE */}
-      <section className="text-center py-10 px-4">
-        <img
-          src="https://i.pravatar.cc/150"
-          alt="María Elena Vargas"
-          className="mx-auto rounded-full mb-4"
-        />
-        <h3 className="font-bold text-xl">María Elena Vargas</h3>
-        <p className="text-gray-600">+50 años de experiencia</p>
-        <p className="text-gray-600">+12.000 alumnas</p>
-      </section>
-
-      {/* TESTIMONIOS */}
-      <section className="bg-gray-100 py-10 px-4">
-        <h2 className="text-center text-2xl font-bold mb-6">
-          Lo que dicen nuestras alumnas
-        </h2>
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <div className="bg-white p-4 rounded-xl shadow">
-            <p>"En 3 meses ya estaba vendiendo mis vestidos."</p>
-            <span className="text-sm text-gray-500">— Laura, México</span>
+    <section className="min-h-screen bg-gradient-to-b from-rose-50 via-white to-white flex flex-col">
+      {/* NAV */}
+      <nav className="w-full px-6 md:px-16 py-5 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="h-10 w-10 rounded-full bg-rose-500 flex items-center justify-center text-white font-black">
+            C
           </div>
-          <div className="bg-white p-4 rounded-xl shadow">
-            <p>"Nunca había tejido y hoy tengo ingresos."</p>
-            <span className="text-sm text-gray-500">— Camila, Colombia</span>
-          </div>
-          <div className="bg-white p-4 rounded-xl shadow">
-            <p>"Me cambió la vida completamente."</p>
-            <span className="text-sm text-gray-500">— Sofía, Perú</span>
-          </div>
+          <span className="font-black text-gray-900 text-lg">CrochetMaster</span>
         </div>
-      </section>
-
-      {/* OFERTA */}
-      <section className="py-12 px-4 text-center">
-        <h2 className="text-2xl font-bold mb-8">Elige tu acceso</h2>
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <div className="border rounded-xl p-6">
-            <h3 className="font-bold text-lg">Básico</h3>
-            <p className="text-2xl font-bold my-4">$9.90</p>
-            <button className="bg-gray-800 text-white px-6 py-2 rounded-lg">
-              Comprar
-            </button>
-          </div>
-          <div className="border-2 border-rose-500 rounded-xl p-6 scale-105">
-            <h3 className="font-bold text-lg text-rose-500">Popular</h3>
-            <p className="text-3xl font-bold my-4">$19.90</p>
-            <button className="bg-rose-500 text-white px-6 py-3 rounded-lg font-bold">
-              Comprar Ahora
-            </button>
-          </div>
-          <div className="border rounded-xl p-6">
-            <h3 className="font-bold text-lg">Premium</h3>
-            <p className="text-2xl font-bold my-4">$39.90</p>
-            <button className="bg-gray-800 text-white px-6 py-2 rounded-lg">
-              Comprar
-            </button>
-          </div>
+        <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-600">
+          <a href="#video" className="hover:text-rose-500 transition-colors cursor-pointer">
+            Curso
+          </a>
+          <a href="#instructor" className="hover:text-rose-500 transition-colors cursor-pointer">
+            Instructora
+          </a>
+          <a href="#testimonios" className="hover:text-rose-500 transition-colors cursor-pointer">
+            Testimonios
+          </a>
+          <a href="#precios" className="hover:text-rose-500 transition-colors cursor-pointer">
+            Precios
+          </a>
         </div>
-      </section>
-
-      {/* GARANTIA */}
-      <section className="bg-green-100 text-center py-8 px-4">
-        <h3 className="font-bold text-lg">Garantía de 7 días</h3>
-        <p>Si no te gusta, te devolvemos el dinero</p>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-10 px-4 max-w-3xl mx-auto">
-        <h2 className="text-2xl font-bold mb-6 text-center">
-          Preguntas Frecuentes
-        </h2>
-        <div className="space-y-4">
-          <div>
-            <h3 className="font-bold">¿Necesito experiencia?</h3>
-            <p className="text-gray-600">No, es desde cero paso a paso.</p>
-          </div>
-          <div>
-            <h3 className="font-bold">¿Cuándo tengo acceso?</h3>
-            <p className="text-gray-600">
-              Inmediatamente después de la compra.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-bold">¿Funciona para vender?</h3>
-            <p className="text-gray-600">
-              Sí, muchas alumnas ya generan ingresos.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA FINAL */}
-      <section className="bg-rose-500 text-white text-center py-10">
-        <h2 className="text-2xl font-bold mb-4">Empieza hoy mismo</h2>
-        <button className="bg-white text-rose-500 px-8 py-3 rounded-lg font-bold">
-          QUIERO EMPEZAR AHORA
+        <button className="border-2 border-rose-400 text-rose-600 font-bold px-5 py-2 rounded-full text-sm hover:bg-rose-500 hover:text-white transition-all whitespace-nowrap cursor-pointer">
+          Empezar
         </button>
-      </section>
-    </div>
+      </nav>
+
+      {/* HERO */}
+      <div className="flex-1 flex flex-col lg:flex-row items-center justify-center px-6 md:px-16 gap-12 py-12">
+        <div className="flex-1 max-w-xl">
+          <span className="inline-block bg-rose-100 text-rose-600 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6">
+            Curso Online de Crochet
+          </span>
+          <h1
+            className="text-4xl md:text-6xl font-black leading-tight text-gray-900 mb-6"
+            style={{ fontFamily: '"Playfair Display", serif' }}
+          >
+            Vestidos y bolsas tejidos con tus{" "}
+            <span className="text-rose-500 italic">manos.</span>
+          </h1>
+          <p className="text-lg text-gray-500 italic mb-8 leading-relaxed">
+            Aprende a tejer piezas únicas y descubre cuánto puedes ganar vendiendo tu arte.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 mb-8">
+            <button className="bg-rose-500 hover:bg-rose-600 text-white font-bold px-10 py-4 rounded-full text-lg shadow-lg hover:shadow-rose-200 hover:shadow-xl transition-all whitespace-nowrap cursor-pointer">
+              Empezar Ahora
+            </button>
+            <a
+              href="#video"
+              className="border-2 border-gray-200 text-gray-700 font-bold px-8 py-4 rounded-full text-lg hover:border-rose-300 transition-all whitespace-nowrap cursor-pointer text-center"
+            >
+              Ver el Curso
+            </a>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="flex -space-x-3">
+              <img alt="alumna" className="w-9 h-9 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=47" />
+              <img alt="alumna" className="w-9 h-9 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=32" />
+              <img alt="alumna" className="w-9 h-9 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=25" />
+              <img alt="alumna" className="w-9 h-9 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=12" />
+            </div>
+            <p className="text-sm text-gray-500">
+              <strong className="text-rose-600">+12.000 alumnas</strong> ya están tejiendo
+            </p>
+          </div>
+        </div>
+
+        <div className="flex-1 max-w-lg w-full">
+          <div className="relative">
+            <div className="absolute -inset-4 bg-rose-100 rounded-3xl rotate-3" />
+            <img
+              alt="Tejido de crochet"
+              className="relative rounded-3xl w-full h-[420px] md:h-[520px] object-cover object-top shadow-xl"
+              src="https://images.unsplash.com/photo-1604176354204-9268737828e4?w=600&h=700&fit=crop"
+            />
+            <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-lg border border-rose-100">
+              <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider">Alumnas activas</p>
+              <p className="text-2xl font-black text-rose-500">12.000+</p>
+            </div>
+            <div className="absolute -top-4 -right-4 bg-rose-500 text-white rounded-2xl p-4 shadow-lg">
+              <p className="text-xs font-bold uppercase tracking-wider">Acceso</p>
+              <p className="text-lg font-black">Vitalicio</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* STATS */}
+      <div className="w-full bg-white border-t border-rose-100 py-6 px-6 md:px-16">
+        <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div>
+            <p className="text-2xl font-black text-rose-500">12.000+</p>
+            <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider mt-1">Alumnas</p>
+          </div>
+          <div>
+            <p className="text-2xl font-black text-rose-500">50 años</p>
+            <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider mt-1">Experiencia</p>
+          </div>
+          <div>
+            <p className="text-2xl font-black text-rose-500">98%</p>
+            <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider mt-1">Satisfacción</p>
+          </div>
+          <div>
+            <p className="text-2xl font-black text-rose-500">3 Planes</p>
+            <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider mt-1">Disponibles</p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
