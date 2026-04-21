@@ -194,6 +194,15 @@ function Index() {
   if (stage === "quiz") {
     return <Quiz onFinish={() => setStage("landing")} />;
   }
+  return <Landing />;
+}
+
+function Landing() {
+  const [revealed, setRevealed] = useState(false);
+  useEffect(() => {
+    const id = setTimeout(() => setRevealed(true), 5000);
+    return () => clearTimeout(id);
+  }, []);
 
   const faqs = [
     {
