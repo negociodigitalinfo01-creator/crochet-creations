@@ -234,21 +234,7 @@ function Index() {
     <div className="min-h-screen bg-gradient-to-b from-rose-50 via-white to-white">
       <CountdownBar />
 
-      {/* NAV */}
-      <nav className="w-full px-6 md:px-16 py-5 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="h-10 w-10 rounded-full bg-rose-500 flex items-center justify-center text-white font-black">
-            C
-          </div>
-          <span className="font-black text-gray-900 text-lg">CrochetMaster</span>
-        </div>
-        <a
-          href="#precios"
-          className="bg-rose-500 hover:bg-rose-600 text-white font-bold px-5 py-2 rounded-full text-sm transition-all whitespace-nowrap"
-        >
-          Quiero empezar
-        </a>
-      </nav>
+
 
       {/* HERO + VIDEO */}
       <section className="px-6 md:px-16 pt-6 pb-12 max-w-5xl mx-auto text-center">
