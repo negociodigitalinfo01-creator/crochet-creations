@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import IntroLanding from "@/components/IntroLanding";
 
 export const Route = createFileRoute("/")({
   component: Index,
