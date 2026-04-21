@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import IntroLanding from "@/components/IntroLanding";
 import instructoraImg from "@/assets/instructora.webp";
+import quizLogo from "@/assets/quiz-logo.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -97,14 +98,17 @@ function Quiz({ onFinish }: { onFinish: () => void }) {
   const current = QUIZ_STEPS[step];
   const progress = ((step + 1) / QUIZ_STEPS.length) * 100;
 
-  const handleNext = () => {
-    if (selected === null) return;
-    if (step < QUIZ_STEPS.length - 1) {
-      setStep(step + 1);
-      setSelected(null);
-    } else {
-      onFinish();
-    }
+  const handleSelect = (i: number) => {
+    if (selected !== null) return;
+    setSelected(i);
+    setTimeout(() => {
+      if (step < QUIZ_STEPS.length - 1) {
+        setStep(step + 1);
+        setSelected(null);
+      } else {
+        onFinish();
+      }
+    }, 350);
   };
 
   return (
@@ -112,9 +116,11 @@ function Quiz({ onFinish }: { onFinish: () => void }) {
       <div className="w-full max-w-xl">
         {/* Logo */}
         <div className="flex flex-col items-center mb-6">
-          <div className="h-14 w-14 rounded-full bg-rose-500 flex items-center justify-center text-white font-black text-xl mb-3">
-            C
-          </div>
+          <img
+            src={quizLogo}
+            alt="CrochetMaster"
+            className="h-16 w-auto mb-3"
+          />
           <p className="text-rose-500 text-xs font-bold tracking-widest uppercase">
             Paso {step + 1} de {QUIZ_STEPS.length}
           </p>
@@ -137,17 +143,18 @@ function Quiz({ onFinish }: { onFinish: () => void }) {
             {current.question}
           </h2>
 
-          <div className="space-y-3 mb-6">
+          <div className="space-y-3">
             {current.options.map((opt, i) => {
               const active = selected === i;
               return (
                 <button
                   key={opt.label}
-                  onClick={() => setSelected(i)}
+                  onClick={() => handleSelect(i)}
+                  disabled={selected !== null}
                   className={`w-full flex items-center gap-3 p-4 rounded-2xl border-2 transition-all text-left ${
                     active
                       ? "bg-rose-100 border-rose-500"
-                      : "bg-rose-50/50 border-transparent hover:border-rose-200"
+                      : "bg-rose-50/50 border-transparent hover:border-rose-300 hover:bg-rose-50"
                   }`}
                 >
                   <span className="h-9 w-9 rounded-full bg-white flex items-center justify-center text-lg shadow-sm">
@@ -160,18 +167,6 @@ function Quiz({ onFinish }: { onFinish: () => void }) {
               );
             })}
           </div>
-
-          <button
-            onClick={handleNext}
-            disabled={selected === null}
-            className={`w-full py-4 rounded-2xl font-bold transition-all ${
-              selected !== null
-                ? "bg-rose-500 text-white hover:bg-rose-600 shadow-md"
-                : "bg-gray-100 text-gray-400 cursor-not-allowed"
-            }`}
-          >
-            {current.cta}
-          </button>
         </div>
 
         {/* Dots */}
