@@ -271,34 +271,28 @@ function Landing() {
           />
         </div>
 
-        {revealed && (
-          <div className="animate-fade-in">
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="#precios"
-                className="bg-rose-500 hover:bg-rose-600 text-white font-bold px-10 py-4 rounded-full text-lg shadow-lg hover:shadow-rose-200 hover:shadow-xl transition-all"
-              >
-                QUIERO EMPEZAR AHORA
-              </a>
-            </div>
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href="#precios"
+            className="bg-rose-500 hover:bg-rose-600 text-white font-bold px-10 py-4 rounded-full text-lg shadow-lg hover:shadow-rose-200 hover:shadow-xl transition-all"
+          >
+            QUIERO EMPEZAR AHORA
+          </a>
+        </div>
 
-            <div className="mt-6 flex items-center justify-center gap-4">
-              <div className="flex -space-x-3">
-                <img alt="alumna" className="w-9 h-9 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=47" />
-                <img alt="alumna" className="w-9 h-9 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=32" />
-                <img alt="alumna" className="w-9 h-9 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=25" />
-                <img alt="alumna" className="w-9 h-9 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=12" />
-              </div>
-              <p className="text-sm text-gray-500">
-                <strong className="text-rose-600">+12.000 alumnas</strong> ya están tejiendo
-              </p>
-            </div>
+        <div className="mt-6 flex items-center justify-center gap-4">
+          <div className="flex -space-x-3">
+            <img alt="alumna" className="w-9 h-9 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=47" />
+            <img alt="alumna" className="w-9 h-9 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=32" />
+            <img alt="alumna" className="w-9 h-9 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=25" />
+            <img alt="alumna" className="w-9 h-9 rounded-full border-2 border-white" src="https://i.pravatar.cc/100?img=12" />
           </div>
-        )}
+          <p className="text-sm text-gray-500">
+            <strong className="text-rose-600">+12.000 alumnas</strong> ya están tejiendo
+          </p>
+        </div>
       </section>
 
-      {revealed && (
-        <div className="animate-fade-in">
 
       {/* STATS */}
       <section className="bg-white border-y border-rose-100 py-8 px-6 md:px-16">
