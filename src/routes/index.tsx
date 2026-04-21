@@ -190,10 +190,13 @@ function Quiz({ onFinish }: { onFinish: () => void }) {
 }
 
 function Index() {
-  const [quizDone, setQuizDone] = useState(false);
+  const [stage, setStage] = useState<"intro" | "quiz" | "landing">("intro");
 
-  if (!quizDone) {
-    return <Quiz onFinish={() => setQuizDone(true)} />;
+  if (stage === "intro") {
+    return <IntroLanding onStart={() => setStage("quiz")} />;
+  }
+  if (stage === "quiz") {
+    return <Quiz onFinish={() => setStage("landing")} />;
   }
 
   const faqs = [
